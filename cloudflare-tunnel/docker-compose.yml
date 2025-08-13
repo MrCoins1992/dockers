@@ -1,0 +1,4 @@
+services:
+  cloudflared:
+    image: cloudflare/cloudflared:${TUNNEL_VERSION}
+    command: tunnel --no-autoupdate run --token ${TUNNEL_TOKEN}
