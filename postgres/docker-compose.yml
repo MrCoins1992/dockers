@@ -10,7 +10,7 @@ services:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       POSTGRES_DB: ${POSTGRES_DB}
     ports:
-      - ${PORT}:5432
+      - ${POSTGRES_PORT}:5432
     volumes:
       - pgdb:/var/lib/postgresql/data
     healthcheck:
@@ -19,5 +19,18 @@ services:
       timeout: 5s
       retries: 5
 
+  pgadmin:
+    image: dpage/pgadmin4:${PGA_VERSION}
+    container_name: pgadmin4
+    restart: always
+    ports:
+      - ${PGA_PORT}:80
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGA_EMAIL}
+      PGADMIN_DEFAULT_PASSWORD: ${PGA_PASS}
+    volumes:
+      - pgadmin:/var/lib/pgadmin
+
 volumes:
   pgdb:
+  pgadmin:
